@@ -1,0 +1,80 @@
+.game-container {
+    background-image: url('../images/game-bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.virtual-keyboard {
+    padding-right: 5px;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    font-size: 0;
+    user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -webkit-user-select: none;
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+}
+.virtual-keyboard .key {
+    background-color: #ffffff;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center;
+    line-height: 40px;
+    vertical-align: middle;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 18px;
+    font-family: sans-serif;
+    cursor: pointer;
+    transition: 0.1s ease;
+    font-weight: 600;
+}
+
+.virtual-keyboard .key.disabled{
+    pointer-events: none;
+    background-color: #000;
+    color: #ffffff;
+}
+
+.virtual-keyboard .key:active {
+    background-color: #999;
+}
+
+@media screen and (max-width: 1200px) {
+    .virtual-keyboard{
+        zoom: 0.8;
+    }
+  }
+
+#input-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 300px;
+    margin: auto;
+}
+
+#input-container input {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 2px solid white;
+    margin: 20px 0;
+}
+
+.play-area{
+    background: rgba(0,0,0,0.4);
+    padding: 50px 0;
+    text-align: center;
+}
