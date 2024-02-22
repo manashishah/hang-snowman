@@ -56,3 +56,9 @@ body::before {
   color: #ffffff;
   z-index: 3;
 }
+
+.modal-header {
+  font-family: "Eater", serif;
+  font-weight: 400;
+  font-style: normal;
+}
