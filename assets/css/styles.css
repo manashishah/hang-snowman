@@ -34,6 +34,7 @@ body::before {
   font-size: 20px;
   font-weight: bold;
   font-family: poppins;
+  /* padding: 23px 20px; */
 }
 
 .home-buttons:hover {
@@ -61,4 +62,107 @@ body::before {
   font-family: "Eater", serif;
   font-weight: 400;
   font-style: normal;
+}
+
+.btn {
+  color: #ffffff;
+  background-color: #131b2c;
+  border: solid 2px #131b2c;
+  font-family: poppins;
+  padding: 8px 6px 8px 6px;
+  text-align: center;
+}
+
+.btn-check:checked + .btn {
+  background-color: #c7d9e8 !important;
+  border-color: #131b2c !important;
+  color: #131b2c !important;
+  border: solid 2px !important;
+}
+.btn:hover {
+  /* color: black; */
+  background-color: #c7d9e8;
+  border-color: #131b2c;
+  color: #131b2c;
+  border: solid 2px;
+}
+
+.modal-body {
+  background-color: #c7d9e8;
+}
+
+/* Add this CSS in your styles.css file or within a <style> tag in the head of your HTML */
+
+.modal-body .form-check {
+  margin-left: -1.5rem; /* Center items horizontally */
+}
+
+.btn-start {
+  width: 10rem;
+  margin-top: 1.5rem;
+
+  font-weight: 600;
+}
+
+.text-uppercase {
+  font-family: poppins;
+}
+
+.text-center {
+  font-family: poppins;
+}
+
+.play-text {
+  margin-top: 1rem;
+  font-size: 20px;
+}
+
+a.text-uppercase.instructions-text {
+  font-size: 11px;
+  color: #131b2c;
+}
+
+.modal-header {
+  font-family: eater;
+}
+h4.score {
+  font-weight: 600;
+  font-style: italic;
+  margin-top: 2rem;
+  font-size: 24px;
+}
+
+h4.level {
+  font-size: 18px;
+  margin-top: 2.5rem;
+}
+
+.image-button {
+  background-position: center center;
+  margin: 0;
+  padding: 0;
+  width: 70px;
+  height: 70px;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  margin-top: 2rem;
+}
+
+.left-image {
+  background-image: url("/assets/images/start-button.svg");
+  margin-right: -9.5rem;
+}
+
+.right-image {
+  background-image: url("/assets/images/end-game-button.svg");
+  margin-left: -9.5rem;
+}
+
+.image-button:hover.left-image {
+  background-image: url("/assets/images/start-button-blue.svg");
+}
+
+.image-button:hover.right-image {
+  background-image: url("/assets/images/end-game-button-blue.svg");
 }

@@ -16,8 +16,12 @@
       href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Eater&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/assets/css/styles.css" />
-    <title>My Simple Page</title>
+    <title>Hang Snow-man</title>
   </head>
 
   <body>
@@ -30,11 +34,18 @@
       >
         Play
       </button>
-      <button class="home-buttons">Categories</button>
+      <button
+        class="home-buttons"
+        data-bs-toggle="modal"
+        data-bs-target="#gameoverModal"
+      >
+        Categories
+      </button>
       <button class="home-buttons">How to Play</button>
       <button class="home-buttons">Scoreboard</button>
     </div>
 
+    <!-- start game modal  -->
     <div
       class="modal fade"
       id="exampleModal"
@@ -51,7 +62,7 @@
             >
               Let's Start!
             </h1>
-            <h4 class="fw-bold text-center mb-4">Select Category:</h4>
+            <h4 class="fw-bold text-center mb-4">Select Category</h4>
 
             <div class="form-check text-center mb-4">
               <input
@@ -118,13 +129,89 @@
                 id="hard"
                 autocomplete="off"
               />
+
               <label class="btn btn-outline-dark w-25" for="hard">Hard</label>
             </div>
 
-            <button type="button" class="btn btn-dark mb-4 w-25">Begin</button>
+            <button type="button" class="btn btn-outline-dark mb-4 btn-start">
+              Begin
+            </button>
 
-            <h3 class="text-center">How to play?</h3>
-            <a class="text-uppercase">Instructions</a>
+            <h3 class="text-center play-text">How to play?</h3>
+            <a class="text-uppercase instructions-text">Instructions</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- game over modal -->
+    <div
+      class="modal fade"
+      id="gameoverModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body text-center justify-content-center">
+            <h1
+              class="modal-header text-center justify-content-center mb-4 border-0"
+              id=""
+            >
+              Well Done!
+            </h1>
+            <h4 class="text-center mb-4 score">Current Score: 00</h4>
+
+            <h4 class="fw-bold text-center mb-4 level">
+              Choose difficulty level:
+            </h4>
+
+            <div class="form-check text-center mb-4">
+              <input
+                type="radio"
+                name="level"
+                class="btn-check"
+                id="easy"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-dark w-25" for="easy">Easy</label>
+
+              <input
+                type="radio"
+                name="level"
+                class="btn-check"
+                id="medium"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-dark w-25" for="medium"
+                >Medium</label
+              >
+
+              <input
+                type="radio"
+                name="level"
+                class="btn-check"
+                id="hard"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-dark w-25" for="hard">Hard </label>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <button
+                  type="button"
+                  class="btn btn-outline-dark mb-4 btn-start image-button left-image"
+                ></button>
+              </div>
+              <div class="col">
+                <button
+                  type="button"
+                  class="btn btn-outline-dark mb-4 btn-start image-button right-image"
+                ></button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
