@@ -1,155 +1,159 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
 .landing-page-container {
-    width: 100%;
-    display: flex;
-    overflow: auto;
-    min-height: 100vh;
-    align-items: center;
-    flex-direction: column;
-  }
-  .landing-page-landing-page {
-    width: 100%;
-    height: 1024px;
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    align-items: flex-start;
-    flex-shrink: 0;
-    background-color: rgba(255, 255, 255, 1);
-  }
-  .landing-page-adobe-stock6767631831 {
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-  }
-  .landing-page-frame1 {
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    overflow: hidden;
-    position: absolute;
-    align-items: flex-start;
-    flex-shrink: 0;
-    background-color: rgba(19, 27, 44, 0.44999998807907104);
-  }
-  .landing-page-playarea {
-    top: 84px;
-    left: 30px;
-    width: 793px;
-    height: 858px;
-    display: flex;
-    position: absolute;
-    align-items: flex-start;
-    flex-shrink: 1;
-  }
-  .landing-page-frame2 {
-    top: 0px;
-    left: 0px;
-    width: 793px;
-    height: 858px;
-    display: flex;
-    overflow: hidden;
-    position: absolute;
-    align-items: flex-start;
-    flex-shrink: 0;
-    background-color: rgba(19, 27, 44, 0.699999988079071);
-  }
-  .landing-page-text {
-    top: 174px;
-    left: 28px;
-    color: rgba(255, 255, 255, 1);
-    font-family: Poppins;
-    font-size: 22px;
-    width: 736px;
-    height: auto;
-    position: absolute;
-    text-align: justified;
-    line-height: normal;
-  }
-  .landing-page-text07 {
-    top: 40px;
-    left: 29px;
-    color: rgba(255, 255, 255, 1);
-    font-family: Eater;
-    font-size: 50px;
-    height: auto;
-    position: absolute;
-    text-align: left;
-    line-height: normal;
-  }
-  .landing-page-playbutton {
-    top: 709px;
-    left: 28px;
-    width: 70px;
-    height: 70px;
-    display: flex;
-    position: absolute;
-    align-items: flex-start;
-    flex-shrink: 1;
-  }
-  .landing-page-frame6 {
-    gap: 10px;
-    top: 0px;
-    left: 0px;
-    width: 170px;
-    height: 70px;
-    display: flex;
-    padding: 14px 112px;
-    position: absolute;
-    box-sizing: content-box;
-    align-items: center;
-    flex-shrink: 0;
-    border-color: rgba(255, 255, 255, 1);
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 5px;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0);
-  }
-  .landing-page-text09 {
-    color: rgba(255, 255, 255, 1);
-    height: auto;
-    font-size: 20px;
-    font-style: Regular;
-    text-align: center;
-    font-family: Poppins;
-    font-weight: 400;
-    line-height: normal;
-    font-stretch: normal;
-    text-decoration: none;
-  }
-  .landing-page-playbutton1 {
-    top: 709px;
-    left: 451px;
-    width: 60px;
-    height: 70px;
-    display: flex;
-    position: absolute;
-    align-items: flex-start;
-    flex-shrink: 1;
-  }
-  .landing-page-frame61 {
-    top: 0px;
-    left: 0px;
-    width: 60px;
-    height: 70px;
-    display: flex;
-    padding: 14px 14px;
-    position: absolute;
-    box-sizing: content-box;
-    align-items: center;
-    flex-shrink: 0;
-    border-color: rgba(255, 255, 255, 1);
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 5px;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0);
-  }
-  .landing-page-icons8arrow501 {
-    width: 50px;
-    height: 50px;
-  }
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  align-items: center;
+  flex-direction: column;
+}
+.landing-page-landing-page {
+  width: 100%;
+  height: 1024px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 1);
+}
+.landing-page-adobe-stock6767631831 {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.landing-page-frame1 {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-color: rgba(19, 27, 44, 0.44999998807907104);
+}
+.landing-page-playarea {
+  top: 84px;
+  left: 30px;
+  width: 793px;
+  height: 858px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 1;
+}
+.landing-page-frame2 {
+  top: 0px;
+  left: 0px;
+  width: 750px;
+  height: 780px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  background-color: rgba(19, 27, 44, 0.699999988079071);
+}
+.landing-page-text {
+  top: 174px;
+  left: 28px;
+  color: rgba(255, 255, 255, 1);
+  font-family: Poppins;
+  font-size: 20px;
+  width: 640px;
+  height: auto;
+  position: absolute;
+  text-align: justify;
+  line-height: normal;
+  font-weight: 300;
+}
+.landing-page-text07 {
+  top: 40px;
+  left: 29px;
+  color: rgba(255, 255, 255, 1);
+  font-family: Eater;
+  font-size: 50px;
+  height: auto;
+  position: absolute;
+  text-align: left;
+  line-height: normal;
+}
+.landing-page-playbutton {
+  top: 660px;
+  left: 28px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 1;
+}
+.landing-page-frame6 {
+  gap: 10px;
+  top: 0px;
+  left: 0px;
+  width: 170px;
+  height: 40px;
+  display: flex;
+  padding: 14px 112px;
+  position: absolute;
+  box-sizing: content-box;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: rgba(255, 255, 255, 1);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0);
+}
+.landing-page-text09 {
+  color: rgba(255, 255, 255, 1);
+  height: auto;
+  font-size: 20px;
+  font-style: Regular;
+  text-align: center;
+  font-family: Poppins;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.landing-page-playbutton1 {
+  top: 660px;
+  left: 451px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 1;
+}
+.landing-page-frame61 {
+  top: 0px;
+  left: 0px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  padding: 14px 14px;
+  position: absolute;
+  box-sizing: content-box;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: rgba(255, 255, 255, 1);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0);
+}
+.landing-page-icons8arrow501 {
+  width: 35px;
+  height: 35px;
+}
