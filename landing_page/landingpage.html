@@ -42,14 +42,29 @@
               <div class="landing-page-playbutton">
                 <div class="landing-page-frame6">
                   <span class="landing-page-text09">
-                    <span>Enter your name</span>
+                    <div id="nameBox" class="landing-page-frame6" contentEditable="true">
+                      <span id="nameText" class="landing-page-text09">Enter your name</span>
+                    </div>                  
                   </span>
+                  <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        // Get the name box element
+                        var nameBox = document.getElementById("nameBox");
+                
+                        // Add click event listener to the name box
+                        nameBox.addEventListener("click", function() {
+                            // Remove the "Enter your name" text
+                            document.getElementById("nameText").textContent = "";
+                        });
+                    });
+                </script>
+                
                 </div>
               </div>
               <div class="landing-page-playbutton1">
                 <div class="landing-page-frame61">
                   <img
-                    src="./icons8-arrow-50 1.png"
+                    src="./play-button-arrowhead.png"
                     alt="icons8arrow5013454"
                     class="landing-page-icons8arrow501"
                   />
