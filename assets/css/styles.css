@@ -88,7 +88,7 @@ body::before {
 .custom-list li {
   padding-left: 40px;
   padding-bottom: 5px;
-  text-indent: -20px; /* Adjust this value to move the text back */
+  text-indent: -20px;
   font-size: 15px;
 }
 
@@ -123,10 +123,8 @@ body::before {
   background-color: #c7d9e8;
 }
 
-/* Add this CSS in your styles.css file or within a <style> tag in the head of your HTML */
-
 .modal-body .form-check {
-  margin-left: -1.5rem; /* Center items horizontally */
+  margin-left: -1.5rem;
 }
 
 .btn-start {
