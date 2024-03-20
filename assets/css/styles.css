@@ -64,6 +64,34 @@ body::before {
   font-style: normal;
 }
 
+#instructionsModal {
+  --bs-modal-width: 850px;
+  /* height: 700px; */
+  --bs-modal-padding: 2rem;
+}
+
+.instruction-list {
+  padding-left: 4rem;
+  text-align: left;
+}
+
+.span-text {
+  font-style: italic;
+  font-weight: 500;
+}
+.challenge-text {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-style: italic;
+  font-weight: 600;
+}
+.custom-list li {
+  padding-left: 40px;
+  padding-bottom: 5px;
+  text-indent: -20px; /* Adjust this value to move the text back */
+  font-size: 15px;
+}
+
 .btn {
   color: #ffffff;
   background-color: #131b2c;
@@ -85,6 +113,10 @@ body::before {
   border-color: #131b2c;
   color: #131b2c;
   border: solid 2px;
+}
+
+#instructionsLink:hover {
+  cursor: pointer;
 }
 
 .modal-body {

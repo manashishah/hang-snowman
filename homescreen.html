@@ -138,7 +138,24 @@
             </button>
 
             <h3 class="text-center play-text">How to play?</h3>
-            <a class="text-uppercase instructions-text">Instructions</a>
+            <a class="text-uppercase instructions-text" id="instructionsLink"
+              >Instructions</a
+            >
+            <script>
+              // Get a reference to the instructions link
+              const instructionsLink =
+                document.getElementById("instructionsLink");
+
+              // Add a click event listener to the instructions link
+              instructionsLink.addEventListener("click", function () {
+                // Open the game over modal
+                const instructionsModal = new bootstrap.Modal(
+                  document.getElementById("instructionsModal")
+                );
+
+                instructionsModal.show();
+              });
+            </script>
           </div>
         </div>
       </div>
@@ -216,7 +233,76 @@
         </div>
       </div>
     </div>
+    <!-- instructions modal -->
+    <div
+      class="modal fade"
+      id="instructionsModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body text-center justify-content-center">
+            <h1
+              class="modal-header text-center justify-content-center mb-4 border-0"
+              id=""
+            >
+              Instructions
+            </h1>
+            <ol class="text-left instruction-list custom-list">
+              <li>
+                Choose a category from
+                <span class="span-text"
+                  >Countries, Superheroes, or Animals.
+                </span>
+              </li>
+              <li>
+                Select
+                <span class="span-text">Easy, Medium, or Hard </span> for your
+                chosen category.
+              </li>
+              <li>A statement related to the word will be provided.</li>
+              <li>
+                Guess the word using the given hint within the
+                <span class="span-text">time limit. </span>
+              </li>
+              <li>
+                Earn <span class="span-text">points </span> based on the
+                difficulty level of the word you guessed.
+              </li>
+              <li>
+                Choose your next difficulty level for the same category or
+                switch to another category.
+              </li>
+              <li>
+                The
+                <span class="span-text">game ends </span>
+                when the timer reaches 0 or when you decide to stop playing.
+              </li>
+              <li>
+                Your <span class="span-text">total score </span> is the sum of
+                the points earned for each correctly guessed word.
+              </li>
+              <li>
+                The <span class="span-text">highest score </span> achieved
+                during the game will be prominently displayed at the end.
+              </li>
+              <li>
+                Beat the highest score by successfully guessing words in all
+                categories & difficulty levels.
+              </li>
+            </ol>
+            <p class="text-center mb-4 challenge-text">
+              Have fun challenging yourself and testing your knowledge across
+              different categories!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- Java script -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
