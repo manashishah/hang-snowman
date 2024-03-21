@@ -1,3 +1,7 @@
+*:focus {
+    outline: none;
+}
+
 .game-container {
     background-image: url('../images/game-bg.jpg');
     background-position: center;
@@ -48,7 +52,7 @@
     background-color: #999;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1400px) {
     .virtual-keyboard {
         zoom: 0.8;
     }
@@ -72,6 +76,7 @@
     font-weight: 600;
     border-bottom: 2px solid white;
     margin: 20px 0;
+    caret-color: transparent;
 }
 
 .play-area {
