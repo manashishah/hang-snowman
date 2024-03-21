@@ -6,6 +6,14 @@ var container = document.getElementById("input-container"); //Container that con
 var inputIndex = 0; //Index to keep the track of entered letter and filled input
 var imageIndex = 0;
 
+var nameBox = document.getElementById("nameBox");
+
+// Add click event listener to the name box
+nameBox.addEventListener("click", function () {
+    // Remove the "Enter your name" text
+    document.getElementById("nameText").textContent = "";
+});
+
 //Different path of images of the snowman, hanging upon failures  
 const imagePaths = [
     './assets/images/stage-1.png',
