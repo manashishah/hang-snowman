@@ -4,6 +4,15 @@ var snowman = document.getElementsByClassName('snowman'); //To get the image tag
 var number = 6; //Number of inputs to render, if word has 6 letters then 6 inputs
 var container = document.getElementById("input-container"); //Container that contains set of inputs
 var inputIndex = 0; //Index to keep the track of entered letter and filled input
+var imageIndex = 0;
+
+var nameBox = document.getElementById("nameBox");
+
+// Add click event listener to the name box
+nameBox.addEventListener("click", function () {
+    // Remove the "Enter your name" text
+    document.getElementById("nameText").textContent = "";
+});
 
 //Different path of images of the snowman, hanging upon failures  
 const imagePaths = [
@@ -14,6 +23,8 @@ const imagePaths = [
     './assets/images/stage-5.png',
     './assets/images/stage-6.png',
 ];
+
+const sampleWord = ['T', 'U', 'R', 'K', 'E', 'Y'];
 
 //Code to render inputs dynamically via js
 while (container.hasChildNodes()) {
@@ -66,15 +77,42 @@ keyboard[0].innerHTML = `
 
 //here's the logic of filling the inputs with the key pressed. Also setting snowman hanging images upon wrong guess. Once it's hanged, showing alert "game over" for now
 function typeVirtualKeyboardKey(key) {
+    // if (inputIndex > 5) {
+    //     return;
+    // }
     key.classList.add("disabled");
-    inputs[inputIndex].value = key.innerHTML;   //Maintaining one index for now to jump to another inputs
-    snowman[0].setAttribute('src', imagePaths[inputIndex]); //Same index for assigning paths declared on the top
+
+    let flag = false;
+    for (i = 0; i < sampleWord.length; i++) {
+        if (key.innerHTML == sampleWord[i]) {
+            flag = true;
+            inputs[i].value = key.innerHTML;   //Maintaining one index for now to jump to another inputs
+        }
+    }
+
+
+    if (!flag) {
+        snowman[0].setAttribute('src', imagePaths[imageIndex]); //Same index for assigning paths declared on the top
+        imageIndex++;
+    }
+
     inputIndex++;
-    if (inputIndex > 5) {
+
+    tempArr = [];
+    for (let input of inputs) {
+        tempArr.push(input.value);
+    }
+    console.log(sampleWord.join(), tempArr.join())
+    if (imageIndex > 5 && (sampleWord.join('') != tempArr.join(''))) {
         setTimeout(() => {
             alert('Game Over!!'); //Game is over once it's hanged
+            location.reload();
         }, "1000");
-
+    } else if ((sampleWord.join('') == tempArr.join(''))) {
+        setTimeout(() => {
+            alert('You Won!!');
+            location.reload();
+        }, "1000");
     }
 }
 
