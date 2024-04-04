@@ -16,6 +16,7 @@ var sampleWord = [];
 //     document.getElementById("nameText").textContent = "";
 // });
 
+
 //Different path of images of the snowman, hanging upon failures  
 const imagePaths = [
     './assets/images/stage-1.png',
@@ -25,6 +26,7 @@ const imagePaths = [
     './assets/images/stage-5.png',
     './assets/images/stage-6.png',
 ];
+
 
 // function start(){
 //     var ele = document.getElementsByName('gender');
@@ -114,6 +116,7 @@ async function startGame() {
 
 // const sampleWord = ['T', 'U', 'R', 'K', 'E', 'Y'];
 
+
 //Code to render inputs dynamically via js
 while (container.hasChildNodes()) {
     container.removeChild(container.lastChild);
@@ -163,7 +166,9 @@ function typeVirtualKeyboardKey(key) {
     //     return;
     // }
 
+
     key.innerHTML = key.innerHTML.toLowerCase();
+
     key.classList.add("disabled");
 
     let flag = false;
