@@ -1,18 +1,21 @@
 var keyboard = document.getElementsByClassName('virtual-keyboard'); //To render virtual keyboard in html
 var inputs = document.getElementsByTagName('input'); //To get all the inputs
 var snowman = document.getElementsByClassName('snowman'); //To get the image tag with class snowman
-var number = 6; //Number of inputs to render, if word has 6 letters then 6 inputs
+var number = 3; //Number of inputs to render, if word has 6 letters then 6 inputs
 var container = document.getElementById("input-container"); //Container that contains set of inputs
 var inputIndex = 0; //Index to keep the track of entered letter and filled input
 var imageIndex = 0;
+var nextWordIndex = 0;
+var sampleWord = [];
 
-var nameBox = document.getElementById("nameBox");
+// var nameBox = document.getElementById("nameBox");
 
-// Add click event listener to the name box
-nameBox.addEventListener("click", function () {
-    // Remove the "Enter your name" text
-    document.getElementById("nameText").textContent = "";
-});
+// // Add click event listener to the name box
+// nameBox.addEventListener("click", function () {
+//     // Remove the "Enter your name" text
+//     document.getElementById("nameText").textContent = "";
+// });
+
 
 //Different path of images of the snowman, hanging upon failures  
 const imagePaths = [
@@ -24,20 +27,102 @@ const imagePaths = [
     './assets/images/stage-6.png',
 ];
 
-const sampleWord = ['T', 'U', 'R', 'K', 'E', 'Y'];
+
+// function start(){
+//     var ele = document.getElementsByName('gender');
+
+//     for (i = 0; i < ele.length; i++) {
+//         if (ele[i].checked)
+//             document.getElementById("result").innerHTML
+//                 = "Gender: " + ele[i].value;
+//     }
+// }
+
+
+// Function to fetch words from the API
+async function fetchWords(category, difficulty) {
+    try {
+        const response = await fetch(`http://localhost:4000/api/words/${category}/${difficulty}`);
+        const data = await response.json();
+        return data.wordsAndHints;
+    } catch (error) {
+        console.error('Error fetching words:', error);
+        return [];
+    }
+}
+
+// Call the fetchWords function to fetch words for the game
+async function startGame() {
+
+    // var ele = document.getElementsByName('category');
+
+
+    // var category = document.querySelector('input[name="category"]:checked').value;
+
+
+
+    // var level = document.querySelector('input[name="level"]:checked').value;
+
+    // const form = document.forms.start;
+    // const checked = form.querySelector('input[name=category]:checked');
+
+    var ele = document.getElementsByName('category');
+
+  
+    for (i = 0; i < ele.length; i++) {
+        if (ele[i].checked)
+            var cat = ele[i].id;
+       
+    }
+
+    var levels = document.getElementsByName('level');
+
+    
+    for (i = 0; i < levels.length; i++) {
+        if (levels[i].checked)
+            var level = levels[i].id;
+       
+    }
+
+
+
+   
+
+    const words = await fetchWords(cat, level);
+    console.log(words); // Use the fetched words in your game logic
+
+
+
+    sampleWord = [...words[nextWordIndex].word.toLowerCase()];
+    document.getElementById('hint').innerHTML = words[nextWordIndex].hint;
+
+
+    number = sampleWord.length;
+
+    for (i = 0; i < number; i++) {
+        var input = document.createElement("input");
+        input.type = "text";
+        input.classList.add("inputs");
+        input.name = "name" + i;
+        container.appendChild(input);
+        container.appendChild(document.createElement("br"));
+    }
+
+    console.log(sampleWord)
+}
+
+// Call the startGame function to begin the game
+//   startGame();
+
+// const sampleWord = ['T', 'U', 'R', 'K', 'E', 'Y'];
+
 
 //Code to render inputs dynamically via js
 while (container.hasChildNodes()) {
     container.removeChild(container.lastChild);
 }
 
-for (i = 0; i < number; i++) {
-    var input = document.createElement("input");
-    input.type = "text";
-    input.name = "name" + i;
-    container.appendChild(input);
-    container.appendChild(document.createElement("br"));
-}
+
 
 //Rendering keyboard, each key has a function which will be called upon clicking
 
@@ -80,6 +165,10 @@ function typeVirtualKeyboardKey(key) {
     // if (inputIndex > 5) {
     //     return;
     // }
+
+
+    key.innerHTML = key.innerHTML.toLowerCase();
+
     key.classList.add("disabled");
 
     let flag = false;
@@ -111,7 +200,24 @@ function typeVirtualKeyboardKey(key) {
     } else if ((sampleWord.join('') == tempArr.join(''))) {
         setTimeout(() => {
             alert('You Won!!');
-            location.reload();
+            // location.reload();
+
+            nextWordIndex++;
+
+            let inputsToRemove = document.getElementsByClassName('inputs');
+
+            while (inputsToRemove.length > 0) {
+                inputsToRemove[0].parentNode.removeChild(inputsToRemove[0]);
+            }
+
+
+            let keys = document.getElementsByClassName('key');
+
+            for (let key of keys) {
+                key.classList.remove("disabled");
+            }
+
+            startGame();
         }, "1000");
     }
 }
