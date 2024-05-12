@@ -30,12 +30,20 @@
   }
   .div-3 {
     position: relative;
+<<<<<<< HEAD
     background: linear-gradient(
+=======
+    /* background: linear-gradient(
+>>>>>>> development
         0deg,
         rgba(255, 255, 255, 0.07) 0%,
         rgba(255, 255, 255, 0.07) 100%
       ),
+<<<<<<< HEAD
       rgba(19, 27, 44, 0.2);
+=======
+      rgba(19, 27, 44, 0.2); */
+>>>>>>> development
     display: flex;
     width: 100%;
     flex-direction: column;

@@ -7,6 +7,8 @@ require('dotenv').config()
 
 app.use(cors());
 
+app.use(express.json());
+
 
 const client = new Client({
   user: process.env.user,
@@ -19,15 +21,15 @@ const client = new Client({
 app.use(express.static('public'));
 
 
-// Connect to the PostgreSQL database
+
 client.connect();
 
-// Route to fetch words based on category and difficulty
+
 app.get('/api/words/:category/:difficulty', async (req, res) => {
   const { category, difficulty } = req.params;
 
   try {
-    // Query to fetch words and hints based on category and difficulty
+
     const result = await client.query(
       `SELECT word, hint
       FROM words
@@ -38,13 +40,13 @@ app.get('/api/words/:category/:difficulty', async (req, res) => {
       [category, difficulty]
     );
 
-    // Extract words and hints from the result
+
     const wordsAndHints = result.rows.map(row => ({
       word: row.word,
       hint: row.hint
     }));
 
-    // Send response with the words and hints
+
     res.json({ wordsAndHints });
   } catch (error) {
     console.error('Error executing query:', error);
@@ -52,8 +54,64 @@ app.get('/api/words/:category/:difficulty', async (req, res) => {
   }
 });
 
-app.get('*', async(req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'main_game.html'));
+app.post('/api/addScore', async (req, res) => {
+  const { playerName, score } = req.body;
+
+  try {
+    const existingPlayer = await client.query(
+      `SELECT * FROM players WHERE player_name = $1`,
+      [playerName]
+    );
+
+    if (existingPlayer.rows.length === 0) {
+
+      const result = await client.query(
+        `INSERT INTO players (player_name, score) VALUES ($1, $2) RETURNING *`,
+        [playerName, score]
+      );
+
+
+      res.json({ success: true, player: result.rows[0] });
+    } else {
+
+      const currentScore = existingPlayer.rows[0].score;
+      if (score > currentScore) {
+        const result = await client.query(
+          `UPDATE players SET score = $1 WHERE player_name = $2 RETURNING *`,
+          [score, playerName]
+        );
+
+
+        res.json({ success: true, player: result.rows[0] });
+      } else {
+
+        res.json({ success: true, message: 'Score not updated as it is not higher than the current score' });
+      }
+    }
+  } catch (error) {
+    console.error('Error inserting player score:', error);
+    res.status(500).json({ success: false, error: 'Failed to add player score' });
+  }
+});
+
+
+app.get('/api/getScores', async (req, res) => {
+  try {
+
+    const result = await client.query(
+      `SELECT * FROM players`
+    );
+
+
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching player scores:', error);
+    res.status(500).json({ error: 'Failed to fetch player scores' });
+  }
+});
+
+app.get('*', async (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'landingpage.html'));
 });
 
 app.listen(4000, () => {

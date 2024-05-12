@@ -7,6 +7,13 @@ var inputIndex = 0; //Index to keep the track of entered letter and filled input
 var imageIndex = 0;
 var nextWordIndex = 0;
 var sampleWord = [];
+var player = '';
+let countdownInterval;
+let timeLeft = 180; // Timer duration in seconds
+const countdownDisplay = document.getElementById('countdown');
+var fetchedWords = [];
+var score = 0;
+var level;
 
 const imagePaths = [
     './assets/images/stage-1.png',
@@ -18,13 +25,18 @@ const imagePaths = [
 ];
 
 var myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {})
+// var nextModal = new bootstrap.Modal(document.getElementById('nextModal'), {})
 myModal.toggle()
+
+// fetchPlayerScores();
 
 
 async function fetchWords(category, difficulty) {
     try {
-        const response = await fetch(`http://132.145.96.62/api/words/${category}/${difficulty}`); //calling api here by fetching data from this url
+        const response = await fetch(`http://129.153.61.220/api/words/${category}/${difficulty}`);
         const data = await response.json();
+        fetchedWords = data.wordsAndHints;
+
         return data.wordsAndHints;
     } catch (error) {
         console.error('Error fetching words:', error);
@@ -35,8 +47,12 @@ async function fetchWords(category, difficulty) {
 
 async function startGame() {
 
-    var closeButton = document.getElementById("close");
-    closeButton.click();
+    player = localStorage.getItem("player");
+    console.log(player)
+
+
+
+
 
     var ele = document.getElementsByName('category');
 
@@ -51,8 +67,19 @@ async function startGame() {
 
     for (i = 0; i < levels.length; i++) {
         if (levels[i].checked)
-            var level = levels[i].id;
+            level = levels[i].id;
     }
+
+    if (!cat || !level) {
+        alert('Please Select category and level');
+        return;
+    }
+
+    var closeButton = document.getElementById("close");
+    closeButton.click();
+
+    startTimer();
+
 
     const words = await fetchWords(cat, level);
 
@@ -78,6 +105,13 @@ while (container.hasChildNodes()) {
     container.removeChild(container.lastChild);
 }
 
+function start() {
+    localStorage.clear();
+    var player = document.getElementById('nameBox').value;
+    localStorage.setItem("player", player);
+    window.location.href = "home.html";
+    console.log(player)
+}
 
 keyboard[0].innerHTML = `
     <div class="letters-row"><span class="key" onmousedown="typeVirtualKeyboardKey(this)">Q</span>
@@ -133,21 +167,70 @@ function typeVirtualKeyboardKey(key) {
 
     inputIndex++;
 
-    console.log(inputs)
     tempArr = [];
     for (let input of inputs) {
         tempArr.push(input.value);
     }
-    console.log(sampleWord.join())
-    console.log(tempArr.join())
+
     if (imageIndex > 5 && (sampleWord.join('') != tempArr.join(''))) {
-        setTimeout(() => {
-            alert('Game Over!!');
-            location.reload();
-        }, "1000");
+        gameOver();
     } else if ((sampleWord.join('') == tempArr.join(''))) {
         setTimeout(() => {
-            alert('You Won!! Play Next.');
+
+            if (nextWordIndex >= fetchedWords.length - 1) {
+                let inputsToRemove = document.getElementsByClassName('inputs');
+
+                while (inputsToRemove.length > 0) {
+                    inputsToRemove[0].parentNode.removeChild(inputsToRemove[0]);
+                }
+
+
+                let keys = document.getElementsByClassName('key');
+
+                for (let key of keys) {
+                    key.classList.remove("disabled");
+                }
+
+                fetchedWords = [];
+                nextWordIndex = 0;
+                myModal.toggle();
+
+                if (level == 'Easy') {
+                    score += 3;
+                }
+                if (level == 'Medium') {
+                    score += 5;
+                }
+                if (level == 'Hard') {
+                    score += 7;
+                }
+
+
+
+                document.getElementById('currentScore').innerHTML = score;
+                return;
+            }
+            // alert('You Won!! Play Next.');
+
+
+
+
+
+            if (level == 'Easy') {
+                score += 3;
+            }
+            if (level == 'Medium') {
+                score += 5;
+            }
+            if (level == 'Hard') {
+                score += 7;
+            }
+
+
+
+            document.getElementById('currentScore').innerHTML = score;
+
+            showAlert('You Won!!');
 
             nextWordIndex++;
 
@@ -164,7 +247,121 @@ function typeVirtualKeyboardKey(key) {
                 key.classList.remove("disabled");
             }
 
+            imageIndex = 0;
+            snowman[0].removeAttribute('src');
+
+
             startGame();
         }, "1000");
     }
 }
+
+
+function startTimer() {
+    // Ensure timer is not already running
+    if (!countdownInterval) {
+        countdownInterval = setInterval(updateTimer, 1000); // Update timer every second
+    }
+}
+
+function stopTimer() {
+    clearInterval(countdownInterval);
+    countdownInterval = null;
+}
+
+function updateTimer() {
+    timeLeft--; // Decrease timeLeft by 1 second
+    if (timeLeft < 0) {
+        stopTimer(); // Stop timer when time is up
+        countdownDisplay.textContent = 'Time\'s up!';
+        gameOver();
+    } else {
+        displayTimeLeft();
+    }
+}
+
+function displayTimeLeft() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    countdownDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function gameOver() {
+
+    // alert('Game Over!!');
+
+    document.getElementById('currentScoreOver').innerHTML = score;
+
+    setScore()
+        .then(() => {
+            console.log('Player score added successfully');
+        })
+        .catch(error => {
+            console.error('Failed to add player score:', error);
+        });
+
+
+
+
+
+}
+
+
+
+
+function setScore() {
+    const data = {
+        playerName: player,
+        score: score
+    };
+
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    };
+
+
+    return fetch('http://129.153.61.220/api/addScore', options)
+        .then(response => {
+
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to add player score');
+            }
+        })
+        .then(data => {
+            console.log('Player data added successfully:', data);
+            var gameOver = new bootstrap.Modal(document.getElementById('gameOver'), {})
+            gameOver.toggle();
+            return data;
+        })
+        .catch(error => {
+            console.error('Error adding player score:', error);
+            throw error;
+        });
+}
+
+
+function showAlert(message) {
+    var alertModal = new bootstrap.Modal(document.getElementById('customAlert'), {
+        backdrop: 'static',
+        keyboard: false
+    });
+
+
+    document.getElementById('customAlertBody').innerHTML = message;
+
+
+    alertModal.show();
+}
+
+
+
+document.querySelector('#customAlert button[data-bs-dismiss="modal"]').addEventListener('click', function () {
+    // alertModal.hide();
+});
