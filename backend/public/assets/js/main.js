@@ -33,10 +33,10 @@ myModal.toggle()
 
 async function fetchWords(category, difficulty) {
     try {
-        const response = await fetch(`http://localhost:4000/api/words/${category}/${difficulty}`);
+        const response = await fetch(`http://129.153.61.220/api/words/${category}/${difficulty}`);
         const data = await response.json();
         fetchedWords = data.wordsAndHints;
-        // console.log(fetchedWords)
+    
         return data.wordsAndHints;
     } catch (error) {
         console.error('Error fetching words:', error);
@@ -167,13 +167,12 @@ function typeVirtualKeyboardKey(key) {
 
     inputIndex++;
 
-    // console.log(inputs)
+  
     tempArr = [];
     for (let input of inputs) {
         tempArr.push(input.value);
     }
-    console.log(sampleWord.join())
-    console.log(tempArr.join())
+ 
     if (imageIndex > 5 && (sampleWord.join('') != tempArr.join(''))) {
         gameOver();
     } else if ((sampleWord.join('') == tempArr.join(''))) {
@@ -196,11 +195,25 @@ function typeVirtualKeyboardKey(key) {
                 fetchedWords = [];
                 nextWordIndex = 0;
                 myModal.toggle();
+
+                if (level == 'Easy') {
+                    score += 3;
+                }
+                if (level == 'Medium') {
+                    score += 5;
+                }
+                if (level == 'Hard') {
+                    score += 7;
+                }
+
+             
+
+                document.getElementById('currentScore').innerHTML = score;
                 return;
             }
             // alert('You Won!! Play Next.');
 
-            showAlert('You Won!!');
+          
 
    
 
@@ -210,13 +223,15 @@ function typeVirtualKeyboardKey(key) {
             if (level == 'Medium') {
                 score += 5;
             }
-            if (level == 'Easy') {
+            if (level == 'Hard') {
                 score += 7;
             }
 
-            // console.log(score)
+          
 
             document.getElementById('currentScore').innerHTML = score;
+
+            showAlert('You Won!!');
 
             nextWordIndex++;
 
@@ -233,6 +248,8 @@ function typeVirtualKeyboardKey(key) {
                 key.classList.remove("disabled");
             }
 
+            imageIndex = 0;
+            snowman[0].removeAttribute('src');
 
 
             startGame();
@@ -274,6 +291,8 @@ function gameOver() {
     
         // alert('Game Over!!');
 
+        document.getElementById('currentScoreOver').innerHTML = score;
+
         setScore()
             .then(() => {
                 console.log('Player score added successfully');
@@ -307,7 +326,7 @@ function setScore() {
     };
 
     
-    return fetch('http://localhost:4000/api/addScore', options)
+    return fetch('http://129.153.61.220/api/addScore', options)
         .then(response => {
            
             if (response.ok) {
@@ -345,5 +364,5 @@ function showAlert(message) {
 
  
   document.querySelector('#customAlert button[data-bs-dismiss="modal"]').addEventListener('click', function() {
-    alertModal.hide();
+    // alertModal.hide();
   });
